@@ -1,0 +1,59 @@
+
+.dropdown{
+  color: #fdf9f9;
+  width: 4cm;
+
+  font-size: 20px;
+  
+
+
+}
+.Findworkers{
+ padding: 5px;
+
+
+
+}
+
+
+#bg {
+  position: fixed; 
+  
+	
+  /* Preserve aspet ratio */
+  min-width: 10%;
+  min-height: 10%;
+
+}
+.top-left {
+  position: absolute;
+
+  top: 100px;
+  left: 16px;
+}
+
+.container {
+  position: relative;
+}
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+ right: 40%;
+
+ padding: 70px;
+  background-color: rgb(209, 213, 216);
+  color:black;
+height: 18cm;
+width: 10cm;
+margin-top:55px;
+margin-bottom:50px;
+
+}
+
+.bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 16px;
+}
