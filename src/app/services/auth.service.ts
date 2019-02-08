@@ -1,7 +1,9 @@
 import { Login } from './../models/login.model';
 import { environment } from './../../environments/environment';
 import { User } from './../models/user.model';
-import { Invoice } from './../models/invoice.model'
+import { Invoice } from '../models/invoice.model';
+//import {Total_Cost} from './../models/user.model'
+//import { Invoice } from './../models/invoice.model'
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -11,18 +13,19 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  BackendURL: String = "http://138.68.177.4:3000/api/";
+  BackendURL: String = "http://localhsot:3000/api/";
 
   constructor(private http: HttpClient) { }
-
+//register client
   signupClient(client: User) {
     console.log(client);
     return this.http.post(this.BackendURL + 'clientRegister', client);
   }
+  //register employee
   signupEmployee(employee: User) {
     return this.http.post(this.BackendURL + 'employeeRegister', employee);
   }
-  
+
   createinvoice(invoice: Invoice) {
     console.log(invoice);
     return this.http.post(this.BackendURL + 'createinvoice', invoice);
@@ -54,6 +57,12 @@ export class AuthService {
 
   getUser() {
     return JSON.parse(localStorage.getItem('user'));
+  }
+  getCost() {
+    return JSON.parse(localStorage.getItem('invoice'));
+  }
+  getTotalCost() {
+    return JSON.parse(localStorage.getItem('invoice'));
   }
 
   signout() {

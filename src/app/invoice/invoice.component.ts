@@ -26,13 +26,15 @@ export class InvoiceComponent implements OnInit {
       User_ID: ['', Validators.required],
       Employee_name: ['', Validators.required],
       Basic_charge: ['', Validators.required],
-     // Cost: ['', Validators.required],
+      //Cost: ['', Validators.required],
       //Total_Cost: ['', Validators.required]
     });
     this.user = this.auth.getUser();
     
     this.form.patchValue({User_ID: this.auth.getUser()._id});
     this.form.patchValue({Employee_name: this.auth.getUser().fname});
+    //this.form.patchValue({Cost:this.auth.getCost().Cost})
+    //this.form.patchValue({Total_Cost:this.auth.getTotalCost().Total_Cost})
   }
 
   viewDiv(){
