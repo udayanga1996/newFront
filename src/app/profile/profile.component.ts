@@ -1,5 +1,5 @@
 import { AuthService } from './../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit, } from '@angular/core';
 import { User } from '../models/user.model';
 
 @Component({
@@ -15,5 +15,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.user = this.auth.getUser();
   }
-
+//comment submission
+  comment(form) {
+    console.log(form.value);
+}
 }

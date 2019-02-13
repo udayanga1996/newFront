@@ -14,14 +14,14 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   selctUser: "nav-link active show";
   type = "employee";
-  ifEmployee;
+  ifEmployee=true;
   constructor(private builder: FormBuilder,
     private auth: AuthService,
     private notifiService: NotificationService,
     private router: Router) { }
 
   ngOnInit() {
-    console.log(this.selctUser);
+   
     if (this.auth.isAuthenticated()) {
       this.router.navigate(['/profile']);
     }
@@ -29,10 +29,13 @@ export class RegisterComponent implements OnInit {
       fname: ['', Validators.required],
       lname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      mobileno: ['', Validators.required],
+      mobileno: ['',Validators.required,],
       password: ['', Validators.required],
-      passwordConfirm: ['', Validators.required]
+      passwordConfirm: ['', Validators.required],
+
+  
     });
+
 
     console.log(this.form);
   }
@@ -40,8 +43,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.type == "employee") {
-      this.ifEmployee = true;
+    if (this.ifEmployee) {
+     
       if (this.form.invalid) {
         this.notifiService.notify({
           title: 'Ooops!',
@@ -75,7 +78,7 @@ export class RegisterComponent implements OnInit {
         });
 
     } else {
-      this.ifEmployee = false;
+      
       if (this.form.invalid) {
         this.notifiService.notify({
           title: 'Ooops!',
@@ -114,14 +117,18 @@ export class RegisterComponent implements OnInit {
   Employee() {
     this.type = "employee"
     this.ifEmployee = true;
-    console.log("employee")
+    
+   
   }
 
   Client() {
     this.type = "client"
     this.ifEmployee = false;
-    console.log("client")
+    
+   
   }
+
+  
 }
 
     /* this.auth.signupEmployee(this.form.value)

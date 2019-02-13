@@ -13,8 +13,9 @@ import { User } from '../models/user.model';
 })
 export class InvoiceComponent implements OnInit {
   user: User;
+  invoice: Invoice;
   form: FormGroup;
-  view:boolean = false;
+  view: boolean = false;
 
   constructor(private builder: FormBuilder,
     private auth: AuthService,
@@ -26,24 +27,26 @@ export class InvoiceComponent implements OnInit {
       User_ID: ['', Validators.required],
       Employee_name: ['', Validators.required],
       Basic_charge: ['', Validators.required],
-      //Cost: ['', Validators.required],
-      //Total_Cost: ['', Validators.required]
+      Cost: ['', Validators.required],
+      Total_Cost: ['', Validators.required]
     });
     this.user = this.auth.getUser();
-    
-    this.form.patchValue({User_ID: this.auth.getUser()._id});
-    this.form.patchValue({Employee_name: this.auth.getUser().fname});
-    //this.form.patchValue({Cost:this.auth.getCost().Cost})
+    this.form.patchValue({ User_ID: this.auth.getUser()._id });
+    this.form.patchValue({ Employee_name: this.auth.getUser().fname });
+    //this.form.patchValue({Cost:this.})
     //this.form.patchValue({Total_Cost:this.auth.getTotalCost().Total_Cost})
+    console.log(this.user);
+
   }
 
-  viewDiv(){
-this.view = true;
+  viewDiv() {
+    this.onSubmit();
   }
 
 
   onSubmit() {
-    if (this.form.invalid) {
+
+    if (this.form.value.Basic_charge == "") {
       this.notifiService.notify({
         title: 'Ooops!',
         description: 'Please recheck form fields for red cross!',
@@ -51,24 +54,31 @@ this.view = true;
       });
       return;
     }
-    if (this.form.value.password !== this.form.value.passwordConfirm) {
-      this.notifiService.notify({
-        title: 'Ooops!',
-        description: 'Please recheck the password fields!',
-        type: 'danger'
-      });
-      return;
+
+    this.view = true;
+
+
+    const invoice = {
+      //token: this.user,
+      Basic_charge: this.form.value.Basic_charge,
+      Cost:parseInt(this.form.value.Basic_charge) * 30 / 100,
+      Total_Cost: parseInt(this.form.value.Basic_charge) + parseInt(this.form.value.Basic_charge) * 30 / 100,
     }
 
-    this.auth.createinvoice(this.form.value)
-      .subscribe((user: Invoice) => {
+    //console.log(invoice);
+
+    this.auth.saveInvoice(this.invoice)
+      .subscribe((invoice: Invoice) => {
+        console.log(invoice);
       }, err => {
         this.notifiService.notify({
           title: 'Ooops!',
-          description: 'Your registrasion has something wrong!',
+          description: 'something wrong!',
           type: 'danger'
         });
       });
   }
+
+
 
 }

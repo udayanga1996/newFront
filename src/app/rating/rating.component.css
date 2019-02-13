@@ -1,12 +1,57 @@
-.pagination {
-  display: flex;
-  justify-content: center;
+.rating {
+  float:center;
 }
 
-.pagination .page-item .page-link {
-  color: yellow;
+.rating:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+  clip:rect(0,0,0,0);
 }
 
-.pagination .not-rated {
-  opacity: 0.5;
+.rating:not(:checked) > label {
+  float:right;
+  width:1em;
+  padding:0.1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:200%;
+  line-height:1.2;
+  color:#ddd;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.rating > input:checked ~ label {
+  color: #f70;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+
+
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #ea0;
+}
+
+.angular-center-container {
+  position: fixed;
+  top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    display:table;
+    pointer-events: none;
+    z-index:9999;
+}
+.angular-centered {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }

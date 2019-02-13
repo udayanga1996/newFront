@@ -6,31 +6,31 @@
       </div>
 
       <div class="container">
-
+<!--profile picture-->
         <div class="photo-container">
-          <img src="../assets/img/punsara.jpg" alt="">
+          <img src= "user.image" alt="user image">
         </div>
 
-        <h3 class="title">{{ user.fname }} {{ user.lname }}</h3>
-        <p class="category">Developer</p>
-        <p>
-          <app-rating [rating]="2"></app-rating>
+        <h3 class="title"> {{ user.fname }} {{ user.lname }} </h3>
+        <p class="category"> {{ user.worktype }} </p>
+        <p>{{ user.bio }}</p>
+
+        <!--Rating-->
+        <div>
+              <p>
+          <app-rating [rating]=0 layout-align="center center" ></app-rating>
         </p>
+      </div>
 
         <div class="content">
           <div class="social-description">
             <h2>26</h2>
             <p>Jobs Done</p>
           </div>
-          <div class="social-description">
-            <h2>26</h2>
-            <p>Comments</p>
-          </div>
-          <div class="social-description">
-            <h2>48</h2>
-            <p>Bookmarks</p>
-          </div>
         </div>
+
+    
+       
 
       </div>
     </div>
@@ -43,19 +43,16 @@
           <a href="#button" class="btn btn-info btn-round btn-lg btn-icon" data-toggle="modal" data-target="#myModal">
             <i class="fab fa-rocketchat"></i>
           </a>
-          <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Follow me on Twitter">
+          <a href="https://twitter.com/" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Follow me on Twitter">
             <i class="fab fa-twitter"></i>
           </a>
-          <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Follow me on Instagram">
+          <a href="https://www.instagram.com/" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Follow me on Instagram">
             <i class="fab fa-instagram"></i>
           </a>
         </div>
 
-        <h3 class="title">About me</h3>
-        <h5 class="description">An artist of considerable range, Ryan — the name taken by Melbourne-raised,
-          Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate
-          feel
-          with a solid groove structure. An artist of considerable range.</h5>
+        <h3 class="title">About Me</h3>
+        <h5 class="description"> {{user.aboutme}} </h5>
 
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
@@ -131,6 +128,25 @@
         </div>
       </div>
     </div>
+
+
+  
+    
+    <!--comment employee-->
+    <div style="margin-bottom: 30px;" class="row">
+        <div class="offset-md-4 col-md-4">
+    <p><b>Comment this employee..</b></p>
+    <form #myform="ngForm" (ngSubmit)="comment(myform)" class="form form-login" id="commentArea" placeHolder="'comment'"  >
+        <div class="form-field">
+          Your Name: <input type="text" name="username">   <br/>  
+        </div>
+        <div class="form-field">   
+      Comment: &nbsp; <textarea name="comment" form="userform"></textarea> <br/> <br/>
+    </div>
+    <div class="form-field">
+      <input type="submit" value="comment"> 
+    </div>
+    </form> 
 
     <app-footer></app-footer>
 

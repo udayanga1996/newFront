@@ -12,13 +12,20 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  type = "employee";
+  ifEmployee = true;
 
   constructor(private builder: FormBuilder,
     private notifiService: NotificationService,
     private auth: AuthService,
-    private router: Router) { }
+    private router: Router) {
+
+
+  }
 
   ngOnInit() {
+    ;
+
     if (this.auth.isAuthenticated()) {
       this.router.navigate(['/profile']);
     }
@@ -28,22 +35,67 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.auth.Employeesignin(this.form.value)
-      .subscribe((user: User) => {
-        this.notifiService.notify({
-          title: 'Well Done!',
-          description: 'You have successfully logged in!',
-          type: 'success'
-        });
-        this.router.navigate(['/profile']);
-      }, err => {
-        this.notifiService.notify({
-          title: 'Ooops!',
-          description: 'Your login has something wrong!',
-          type: 'danger'
-        });
-      });
+
+  Employee() {
+    this.type = "employee"
+    this.ifEmployee = true;
+    console.log("Em");
+
+
   }
 
+  Client() {
+    this.type = "client"
+    this.ifEmployee = false;
+    console.log("Cli");
+
+
+  }
+
+
+
+  onSubmit() {
+
+    if (this.ifEmployee) {
+      this.auth.signin(this.form.value.this.type)
+        .subscribe((user: User) => {
+          this.notifiService.notify({
+            title: 'Well Done!',
+            description: 'You have successfully logged in!',
+            type: 'success'
+          });
+
+          this.router.navigate(['/profile']);
+
+        }, err => {
+          this.notifiService.notify({
+            title: 'Ooops!',
+            description: 'Your login has something wrong!',
+            type: 'danger'
+          });
+        });
+
+    }
+
+    else {
+      this.auth.signin(this.form.value.this.type)
+        .subscribe((user: User) => {
+          this.notifiService.notify({
+            title: 'Well Done!',
+            description: 'You have successfully logged in!',
+            type: 'success'
+          });
+
+          this.router.navigate(['/newclient']);
+
+        }, err => {
+          this.notifiService.notify({
+            title: 'Ooops!',
+            description: 'Your login has something wrong!',
+            type: 'danger'
+          });
+        });
+
+    }
+  }
 }

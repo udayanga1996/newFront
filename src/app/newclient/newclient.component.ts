@@ -15,4 +15,13 @@ export class NewclientComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  onSearch() {
+
+    this.router.navigate(['/worklist']);
+
+
 }
+}
+

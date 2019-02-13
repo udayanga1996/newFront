@@ -1,0 +1,22 @@
+
+  
+  
+  
+  
+  #bg {
+    position: fixed;
+
+      
+    /* Preserve aspet ratio */
+    min-width: 10%;
+    min-height: 10%;
+  
+  }
+  .top-left {
+    position: absolute;
+  
+    top: 100px;
+    left: 16px;
+  }
+  
+  

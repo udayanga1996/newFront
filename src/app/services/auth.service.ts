@@ -13,10 +13,10 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  BackendURL: String = "http://localhsot:3000/api/";
+  BackendURL: String = "http://localhost:3000/api/";
 
   constructor(private http: HttpClient) { }
-//register client
+  //register client
   signupClient(client: User) {
     console.log(client);
     return this.http.post(this.BackendURL + 'clientRegister', client);
@@ -26,13 +26,8 @@ export class AuthService {
     return this.http.post(this.BackendURL + 'employeeRegister', employee);
   }
 
-  createinvoice(invoice: Invoice) {
-    console.log(invoice);
-    return this.http.post(this.BackendURL + 'createinvoice', invoice);
-  }
-
-  login(client: Login) {
-    return this.http.post(this.BackendURL + 'client/:email', client)
+  Clientlogin(client: Login) {
+    return this.http.post(this.BackendURL + 'login', client)
       .pipe(map(response => {
         this.setSession(response);
         return response;
@@ -40,11 +35,35 @@ export class AuthService {
   }
 
   Employeesignin(employee: Login) {
-    return this.http.post(this.BackendURL + 'login', employee)
+    return this.http.post(this.BackendURL + 'employee/:email', employee)
       .pipe(map(response => {
         this.setSession(response);
         return response;
       }));
+  }
+
+  signin(login: Login) {
+    return this.http.post(this.BackendURL + 'login', login)
+      .pipe(map(response => {
+        this.setSession(response);
+        return response;
+      }));
+  }
+
+  saveInvoice(invoice: Invoice) {
+    console.log(invoice);
+    return this.http.post(this.BackendURL + 'saveInvoice', invoice);
+  }
+
+  displayInvoice(invoice: Invoice) {
+    console.log(invoice);
+    return this.http.post(this.BackendURL + 'displayinvoice', invoice);
+  }
+
+
+  createinvoice(invoice) {
+    console.log(invoice);
+    return this.http.post(this.BackendURL + 'createinvoice', invoice);
   }
 
   isAuthenticated() {

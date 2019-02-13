@@ -39,14 +39,7 @@
           <a class="nav-link" href="/register">Sign Up</a>
         </li>
 
-        <li *ngIf="isLoggedIn()" class="nav-item">
-          <a class="nav-link" href="/find">Find Worker</a>
-        </li>
-
-        <li *ngIf="isLoggedIn()" class="nav-item">
-          <a class="nav-link" href="/myjobs">My Jobs</a>
-        </li>
-
+       
         <li *ngIf="isLoggedIn()" class="nav-item">
           <a class="nav-link" (click)="logout()" href="javascript:void(0)">Logout</a>
         </li>
