@@ -42,17 +42,21 @@ export class AuthService {
       }));
   }
 
+  /* Employee login */
   signin(login: Login) {
-    return this.http.post(this.BackendURL + 'login', login)
+    return this.http.post(this.BackendURL + 'login/employee', login)
       .pipe(map(response => {
         this.setSession(response);
         return response;
       }));
   }
 
-  saveInvoice(invoice: Invoice) {
-    console.log(invoice);
-    return this.http.post(this.BackendURL + 'saveInvoice', invoice);
+  saveInvoice(invoice) {
+    return this.http.post(this.BackendURL + 'saveInvoice', invoice)
+      .pipe(map(response => {
+        this.setSession(response);
+        return response;
+      }));
   }
 
   displayInvoice(invoice: Invoice) {
@@ -61,9 +65,12 @@ export class AuthService {
   }
 
 
-  createinvoice(invoice) {
-    console.log(invoice);
-    return this.http.post(this.BackendURL + 'createinvoice', invoice);
+  createInvoice(invoice) {
+    return this.http.post(this.BackendURL + 'createinvoice', invoice)
+      .pipe(map(response => {
+        this.setSession(response);
+        return response;
+      }));
   }
 
   isAuthenticated() {
@@ -72,6 +79,14 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  setToken(Usertoken:any){
+    localStorage.setItem('token',Usertoken.token);
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
   }
 
   getUser() {

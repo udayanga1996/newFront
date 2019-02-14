@@ -12,10 +12,12 @@ import { User } from '../models/user.model';
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
+  token: string
   user: User;
   invoice: Invoice;
   form: FormGroup;
   view: boolean = false;
+  apiInvoice: any;
 
   constructor(private builder: FormBuilder,
     private auth: AuthService,
@@ -24,25 +26,14 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.builder.group({
-      User_ID: ['', Validators.required],
-      Employee_name: ['', Validators.required],
-      Basic_charge: ['', Validators.required],
-      Cost: ['', Validators.required],
-      Total_Cost: ['', Validators.required]
+      Basic_charge: ['', Validators.required]
     });
-    this.user = this.auth.getUser();
-    this.form.patchValue({ User_ID: this.auth.getUser()._id });
-    this.form.patchValue({ Employee_name: this.auth.getUser().fname });
-    //this.form.patchValue({Cost:this.})
-    //this.form.patchValue({Total_Cost:this.auth.getTotalCost().Total_Cost})
-    console.log(this.user);
-
+    this.token = localStorage.getItem('token');
   }
 
   viewDiv() {
     this.onSubmit();
   }
-
 
   onSubmit() {
 
@@ -55,30 +46,42 @@ export class InvoiceComponent implements OnInit {
       return;
     }
 
-    this.view = true;
-
 
     const invoice = {
-      //token: this.user,
-      Basic_charge: this.form.value.Basic_charge,
-      Cost:parseInt(this.form.value.Basic_charge) * 30 / 100,
-      Total_Cost: parseInt(this.form.value.Basic_charge) + parseInt(this.form.value.Basic_charge) * 30 / 100,
+      token: this.token,
+      Basic_charge: this.form.value.Basic_charge
     }
+    this.auth.createInvoice(invoice).subscribe((result: any) => {
+      console.log(result.invoice);
+      this.apiInvoice = result.invoice;
+      this.view = true;
+    })
 
-    //console.log(invoice);
-
-    this.auth.saveInvoice(this.invoice)
-      .subscribe((invoice: Invoice) => {
-        console.log(invoice);
-      }, err => {
-        this.notifiService.notify({
-          title: 'Ooops!',
-          description: 'something wrong!',
-          type: 'danger'
-        });
-      });
   }
 
-
+  saveInvoice() {
+    this.auth.saveInvoice({ Frontinvoice: this.apiInvoice }).subscribe((result: any) => {
+      console.log(result);
+      if (result.success) {
+        this.notifiService.notify({
+          title: 'Invoice',
+          description: result.msg,
+          type: 'success'
+        });
+        this.router.navigate(['/profile']);
+      }
+      else {
+        this.notifiService.notify({
+          title: 'Invoice',
+          description: result.msg,
+          type: 'danger'
+        });
+      }
+    })
+  }
+  clearInvoice(){
+    this.form.reset();
+    this.view = false;
+  }
 
 }

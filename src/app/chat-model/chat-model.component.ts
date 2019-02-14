@@ -15,25 +15,8 @@ export class ChatModelComponent implements OnInit {
   private myUsername = 'worker';
 
   private messages: any[] = [
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, I\'m fine?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
-    { sender: 'punsara', message: 'Hi, how are you?' },
-    { sender: 'achintha', message: 'Hi, how are you?' },
+    { sender: 'a', message: 'Hi, how are you?' },
+    { sender: 'b', message: 'Hi, I\'m fine?' },
   ];
 
   constructor(private fire: FirebaseService) { }

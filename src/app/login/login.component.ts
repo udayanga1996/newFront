@@ -52,21 +52,22 @@ export class LoginComponent implements OnInit {
 
   }
 
-
-
   onSubmit() {
-
     if (this.ifEmployee) {
-      this.auth.signin(this.form.value.this.type)
-        .subscribe((user: User) => {
+      this.auth.signin(this.form.value)
+        .subscribe((result) => {
+
+          this.auth.setToken(result);
+
           this.notifiService.notify({
             title: 'Well Done!',
             description: 'You have successfully logged in!',
             type: 'success'
           });
 
+          // console.log(result.token);
           this.router.navigate(['/profile']);
-
+          
         }, err => {
           this.notifiService.notify({
             title: 'Ooops!',
@@ -79,7 +80,7 @@ export class LoginComponent implements OnInit {
 
     else {
       this.auth.signin(this.form.value.this.type)
-        .subscribe((user: User) => {
+        .subscribe((client: User) => {
           this.notifiService.notify({
             title: 'Well Done!',
             description: 'You have successfully logged in!',
